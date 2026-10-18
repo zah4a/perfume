@@ -31,6 +31,19 @@ const PRICE3 = "25,000 IQD";
 const PRICE4 = "35,000 IQD";
 const PRICE5 = "40,000 IQD";
 const PRICE6 = "42,000 IQD";
+const PRICE7 = "32,000 IQD";
+const PRICE8 = "37,000 IQD";
+const PRICE9 = "38,000 IQD";
+const PRICE10 = "43,000 IQD";
+const PRICE11 = "55,000 IQD";
+const PRICE12 = "57,000 IQD";
+const PRICE13 = "70,000 IQD";
+const PRICE14 = "65,000 IQD";
+const PRICE15 = "67,000 IQD";
+const PRICE16 = "62,000 IQD";
+const PRICE17 = "34,000 IQD";
+const PRICE18 = "80,000 IQD";
+const PRICE19 = "120,000 IQD";
 
 /* هەر عطرەک ب ناڤێ خۆ ل ژێر سەرنڤیسەکێ دیارە.
    بۆ سڕینا عطرەکێ: ژ خەتا «// ✂ ... START» هەتا «// ✂ ... END» هەمووی بسڕەوە،
@@ -205,7 +218,152 @@ const PRODUCTS = [
 
   // ✂ JEAN LOWE FANTASME (Maison Alhambra) — START
   {cat:"men", name:"Jean Lowe Fantasme", brand:"Maison Alhambra", size:"100ml", price:PRICE6,
-   desc:"", notes:[], img:"images/jean-lowe-fantasme.jpg", imgs:[], tag:"", featured:false, stock:true}
+   desc:"", notes:[], img:"images/jean-lowe-fantasme.jpg", imgs:[], tag:"", featured:false, stock:true},
   // ✂ JEAN LOWE FANTASME (Maison Alhambra) — END
+
+  // ✂ NOW WOMEN (Rave) — START
+  {cat:"women", name:"Now Women", brand:"Rave", size:"", price:PRICE,
+   desc:"", notes:[], img:"images/now-women-rave.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ NOW WOMEN (Rave) — END
+
+  // ✂ CANARI VANILLA CANDY (Shams Perfumes) — START
+  {cat:"women", name:"Canari Vanilla Candy", brand:"Shams Perfumes", size:"100ml", price:PRICE7,
+   desc:"", notes:["Vanilla"], img:"images/canari-vanilla-candy.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ CANARI VANILLA CANDY (Shams Perfumes) — END
+
+  // ✂ CANARI MARSHMALLOW (Shams Perfumes) — START
+  {cat:"women", name:"Canari Marshmallow", brand:"Shams Perfumes", size:"100ml", price:PRICE7,
+   desc:"", notes:[], img:"images/canari-marshmallow.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ CANARI MARSHMALLOW (Shams Perfumes) — END
+
+  // ✂ VULCAN BAIE (French Avenue) — START
+  {cat:"women", name:"Vulcan Baie", brand:"French Avenue", size:"", price:PRICE8,
+   desc:"", notes:[], img:"images/vulcan-baie.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ VULCAN BAIE (French Avenue) — END
+
+  // ✂ AYLUL FOR HER — START
+  {cat:"women", name:"Aylul For Her", brand:"", size:"90ml", price:PRICE8,
+   desc:"", notes:[], img:"images/aylul-for-her.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ AYLUL FOR HER — END
+
+  // ✂ ANA ABIYEDH (Lattafa) — START
+  {cat:"women", name:"Ana Abiyedh | أنا الأبيض", brand:"Lattafa", size:"60ml", price:PRICE9,
+   desc:"", notes:[], img:"images/ana-abiyedh.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ ANA ABIYEDH (Lattafa) — END
+
+  // ✂ MAYAR (Lattafa) — START
+  {cat:"women", name:"Mayar | ميار", brand:"Lattafa", size:"", price:PRICE10,
+   desc:"", notes:[], img:"images/mayar-lattafa.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ MAYAR (Lattafa) — END
+
+  // ✂ AMBER D'OR (French Avenue) — START
+  {cat:"women", name:"Amber D'or", brand:"French Avenue", size:"100ml", price:PRICE11,
+   desc:"", notes:["Amber"], img:"images/amber-dor.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ AMBER D'OR (French Avenue) — END
+
+  // ✂ HAWAS ICE (Rasasi) — START
+  {cat:"men", name:"Hawas Ice | هوس", brand:"Rasasi", size:"100ml", price:PRICE11,
+   desc:"", notes:[], img:"images/hawas-ice.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ HAWAS ICE (Rasasi) — END
+
+  // ✂ MARMARA (French Avenue) — START
+  {cat:"men", name:"Marmara", brand:"French Avenue", size:"", price:PRICE11,
+   desc:"", notes:[], img:"images/marmara.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ MARMARA (French Avenue) — END
+
+  // ✂ HAWAS BLACK (Rasasi) — START
+  {cat:"men", name:"Hawas Black | هوس", brand:"Rasasi", size:"100ml", price:PRICE12,
+   desc:"", notes:[], img:"images/hawas-black.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ HAWAS BLACK (Rasasi) — END
+
+  // ✂ BONAPARTE (Collection Prestige) — START
+  {cat:"men", name:"Bonaparte", brand:"Collection Prestige", size:"50ml", price:PRICE13,
+   desc:"", notes:[], img:"images/bonaparte.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ BONAPARTE (Collection Prestige) — END
+
+  // ✂ MEGARA (Maison Alhambra) — START
+  {cat:"men", name:"Megara", brand:"Maison Alhambra", size:"50ml", price:PRICE14,
+   desc:"", notes:[], img:"images/megara.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ MEGARA (Maison Alhambra) — END
+
+  // ✂ CLUB DE NUIT MALEKA (Armaf) — START
+  {cat:"women", name:"Club de Nuit Maleka", brand:"Armaf", size:"105ml", price:PRICE14,
+   desc:"", notes:[], img:"images/club-de-nuit-maleka.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ CLUB DE NUIT MALEKA (Armaf) — END
+
+  // ✂ KHAMRAH QAHWA (Lattafa) — START
+  {cat:"men", name:"Khamrah Qahwa | خمرة قهوة", brand:"Lattafa", size:"", price:PRICE2,
+   desc:"", notes:["Coffee"], img:"images/khamrah-qahwa.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ KHAMRAH QAHWA (Lattafa) — END
+
+  // ✂ KHAMRAH (Lattafa) — START
+  {cat:"men", name:"Khamrah | خمرة", brand:"Lattafa", size:"", price:PRICE2,
+   desc:"", notes:[], img:"images/khamrah.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ KHAMRAH (Lattafa) — END
+
+  // ✂ 9PM REBEL (Afnan) — START
+  {cat:"men", name:"9 PM Rebel", brand:"Afnan", size:"100ml", price:PRICE2,
+   desc:"", notes:[], img:"images/9pm-rebel.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ 9PM REBEL (Afnan) — END
+
+  // ✂ CLUB DE NUIT URBAN MAN ELIXIR (Armaf) — START
+  {cat:"men", name:"Club de Nuit Urban Man Elixir", brand:"Armaf", size:"105ml", price:PRICE15,
+   desc:"", notes:[], img:"images/club-de-nuit-urban-man-elixir.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ CLUB DE NUIT URBAN MAN ELIXIR (Armaf) — END
+
+  // ✂ CLUB DE NUIT INTENSE MAN (Armaf) — START
+  {cat:"men", name:"Club de Nuit Intense Man", brand:"Armaf", size:"105ml", price:PRICE16,
+   desc:"", notes:[], img:"images/club-de-nuit-intense-man.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ CLUB DE NUIT INTENSE MAN (Armaf) — END
+
+  // ✂ PHILOS PURA (Maison Alhambra) — START
+  {cat:"women", name:"Philos Pura", brand:"Maison Alhambra", size:"100ml", price:PRICE17,
+   desc:"", notes:[], img:"images/philos-pura.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ PHILOS PURA (Maison Alhambra) — END
+
+  // ✂ RAYHAAN OBSIDIAN — START
+  {cat:"men", name:"Rayhaan Obsidian", brand:"Rayhaan", size:"", price:PRICE5,
+   desc:"", notes:[], img:"images/rayhaan-obsidian.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ RAYHAAN OBSIDIAN — END
+
+  // ✂ RAYHAAN TERRA — START
+  {cat:"men", name:"Rayhaan Terra", brand:"Rayhaan", size:"", price:PRICE5,
+   desc:"", notes:[], img:"images/rayhaan-terra.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ RAYHAAN TERRA — END
+
+  // ✂ RAYHAAN LION — START
+  {cat:"men", name:"Rayhaan Lion", brand:"Rayhaan", size:"100ml", price:PRICE5,
+   desc:"", notes:[], img:"images/rayhaan-lion.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ RAYHAAN LION — END
+
+  // ✂ RAYHAAN ELIXIR — START
+  {cat:"men", name:"Rayhaan Elixir", brand:"Rayhaan", size:"", price:PRICE5,
+   desc:"", notes:[], img:"images/rayhaan-elixir.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ RAYHAAN ELIXIR — END
+
+  // ✂ RAYHAAN PRETTY IN PINK — START
+  {cat:"women", name:"Rayhaan Pretty in Pink", brand:"Rayhaan", size:"", price:PRICE5,
+   desc:"", notes:[], img:"images/rayhaan-pretty-in-pink.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ RAYHAAN PRETTY IN PINK — END
+
+  // ✂ HERSH 55° — START
+  {cat:"men", name:"Hersh 55°", brand:"Hersh", size:"100ml", price:PRICE18,
+   desc:"", notes:[], img:"images/hersh-55.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ HERSH 55° — END
+
+  // ✂ HERSH LAHAB — START
+  {cat:"men", name:"Hersh Lahab | لهب", brand:"Hersh", size:"100ml", price:PRICE18,
+   desc:"", notes:[], img:"images/hersh-lahab.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ HERSH LAHAB — END
+
+  // ✂ HERSH MEHWAR — START
+  {cat:"women", name:"Hersh Mehwar | محور", brand:"Hersh", size:"100ml", price:PRICE18,
+   desc:"", notes:[], img:"images/hersh-mehwar.jpg", imgs:[], tag:"", featured:false, stock:true},
+  // ✂ HERSH MEHWAR — END
+
+  // ✂ ROSES VANILLE (Mancera) — START
+  {cat:"women", name:"Roses Vanille", brand:"Mancera", size:"120ml", price:PRICE19,
+   desc:"", notes:["Rose","Vanilla"], img:"images/roses-vanille-mancera.jpg", imgs:[], tag:"", featured:false, stock:true}
+  // ✂ ROSES VANILLE (Mancera) — END
 
 ];
