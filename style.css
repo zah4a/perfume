@@ -211,3 +211,15 @@ header.sc .bar{height:54px}
 .sb-in input::-webkit-search-cancel-button{display:none}
 .sb-in button{position:absolute;inset-inline-end:8px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(247,241,227,.1);cursor:pointer;font-size:14px}
 html{overflow-anchor:none}
+
+/* ===== developer credit ===== */
+.credit{margin:22px auto 0;padding-top:20px;max-width:340px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:4px;position:relative}
+.credit::before{content:"";position:absolute;top:-1px;left:50%;width:56px;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.credit-line{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.credit-name{font:italic 500 26px/1.3 'Cormorant Garamond',serif;letter-spacing:.06em;background:linear-gradient(90deg,var(--gold),#fff3d1,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent;transition:.3s}
+.credit-name:hover{filter:brightness(1.2);transform:translateY(-1px)}
+.credit-cta{margin-top:8px;display:inline-block;border:1px solid var(--line);background:var(--glass);border-radius:30px;padding:6px 18px;font-size:12.5px;transition:.3s}
+.credit-cta b{color:var(--gold);font-weight:500}
+.credit-cta:hover{border-color:var(--gold);transform:translateY(-2px)}
+.credit-tt{margin-top:6px;font-size:12px;letter-spacing:.08em;color:var(--mute);transition:.3s}
+.credit-tt:hover{color:var(--gold)}
