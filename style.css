@@ -223,3 +223,16 @@ html{overflow-anchor:none}
 .credit-cta:hover{border-color:var(--gold);transform:translateY(-2px)}
 .credit-tt{margin-top:6px;font-size:12px;letter-spacing:.08em;color:var(--mute);transition:.3s}
 .credit-tt:hover{color:var(--gold)}
+
+/* ===== detail sheet fix: smaller photo + order button always visible ===== */
+.dt-sheet{max-width:500px;max-height:88vh;padding-bottom:0}
+.dt-img{aspect-ratio:auto;height:clamp(200px,34vh,320px)}
+.dt-img svg.ph{width:76px;height:104px}
+.dt-in{padding:16px 22px 6px}
+.dt-in h3{font-size:28px;margin:2px 0 8px}
+.dt-price{font-size:26px;margin-bottom:8px}
+.dt-desc{font-size:14.5px;line-height:1.85;margin-bottom:12px}
+.notes{margin-bottom:12px}
+.dt-bar{position:sticky;bottom:0;z-index:4;padding:22px 22px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(15,42,35,0),var(--bg2) 42%)}
+.dt-bar .order{margin:0}
+@media(max-width:759px){.dt-sheet{max-height:86vh}}

@@ -68,7 +68,7 @@
   var o=mk('a','order'+(inStock(p)?'':' off'));
   if(inStock(p)){o.href=msg(p);o.target='_blank';o.rel='noopener';o.innerHTML=WA;o.appendChild(mk('span','',L('order')))}
   else o.appendChild(mk('span','',L('soldBtn')));
-  dtBody.appendChild(o);
+  var bar=mk('div','dt-bar');bar.appendChild(o);dtBody.appendChild(bar);
  }
  var lockY=0,locked=false;
  function lock(){if(locked)return;locked=true;lockY=window.scrollY||document.documentElement.scrollTop||0;var b=document.body.style;b.position='fixed';b.top=(-lockY)+'px';b.left='0';b.right='0';b.width='100%'}
