@@ -70,13 +70,35 @@
   else o.appendChild(mk('span','',L('soldBtn')));
   dtBody.appendChild(o);
  }
- function openDetail(p){curP=p;renderDetail();dt.classList.add('on');dt.setAttribute('aria-hidden','false');dt.firstElementChild.scrollTop=0;document.body.style.overflow='hidden'}
- function closeDetail(){dt.classList.remove('on');dt.setAttribute('aria-hidden','true');curP=null;document.body.style.overflow=''}
+ var lockY=0,locked=false;
+ function lock(){if(locked)return;locked=true;lockY=window.scrollY||document.documentElement.scrollTop||0;var b=document.body.style;b.position='fixed';b.top=(-lockY)+'px';b.left='0';b.right='0';b.width='100%'}
+ function unlock(){if(!locked)return;locked=false;var b=document.body.style;b.position='';b.top='';b.left='';b.right='';b.width='';var y=lockY;window.scrollTo({top:y,left:0,behavior:'instant'});requestAnimationFrame(function(){window.scrollTo({top:y,left:0,behavior:'instant'})});setTimeout(function(){if(Math.abs(window.scrollY-y)>2&&!locked)window.scrollTo({top:y,left:0,behavior:'instant'})},120)}
+ function openDetail(p){curP=p;renderDetail();try{history.scrollRestoration='manual';history.pushState({zd:1},'')}catch(e){}lock();dt.classList.add('on');dt.setAttribute('aria-hidden','false');dt.firstElementChild.scrollTop=0}
+ function closeDetail(){if(!dt.classList.contains('on'))return;if(history.state&&history.state.zd){history.back();return}hideDetail()}
+ function hideDetail(){dt.classList.remove('on');dt.setAttribute('aria-hidden','true');curP=null;unlock()}
+ window.addEventListener('popstate',function(){if(dt.classList.contains('on'))hideDetail()});
+ function norm(t){return String(t||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u064b-\u065f\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[^a-z0-9\u0600-\u06ff\s]/g,' ').replace(/\s+/g,' ').trim()}
+ PRODUCTS.forEach(function(p){p._s=norm([p.name,p.brand,p.size,(p.notes||[]).join(' '),p.desc,p.price].join(' '))});
+ var query='',first=true,total=PRODUCTS.length,avail=PRODUCTS.filter(inStock).length;
+ function countText(n){
+  if(query)return n+' / '+total+' perfumes';
+  return avail+' perfumes available'+(avail<total?' · '+total+' total':'');
+ }
  function render(){
   grid.replaceChildren();
-  if(!PRODUCTS.length)grid.appendChild(mk('div','empty',L('none')));
-  PRODUCTS.forEach(function(p,i){var c=card(p);c.style.setProperty('--i',i);grid.appendChild(c)});
+  var terms=norm(query).split(' ').filter(Boolean);
+  var list=PRODUCTS.filter(function(p){return terms.every(function(t){return p._s.indexOf(t)>-1})});
+  document.getElementById('countLine').textContent=countText(list.length);
+  if(!list.length)grid.appendChild(mk('div','empty',query?'No perfumes found':L('none')));
+  grid.classList.toggle('nofx',!first);
+  list.forEach(function(p,i){var c=card(p);c.style.setProperty('--i',Math.min(i,8));grid.appendChild(c)});
+  first=false;
  }
+ var qi=document.getElementById('q'),qc=document.getElementById('qClear'),qt=null;
+ function setQ(v){query=v;qc.classList.toggle('hide',!v);render()}
+ qi.addEventListener('input',function(){clearTimeout(qt);var v=qi.value;qc.classList.toggle('hide',!v);qt=setTimeout(function(){setQ(v)},120)});
+ qi.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();qi.blur()}});
+ qc.onclick=function(){qi.value='';setQ('');qi.focus()};
  document.getElementById('dtX').onclick=closeDetail;
  dt.onclick=function(e){if(e.target===dt)closeDetail()};
  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(dt.classList.contains('on'))closeDetail()}});
