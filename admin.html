@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl"><head><meta charset="UTF-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a1d18">
+<title>پانێلا ئەدمین | ZAHA</title><link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}[hidden]{display:none!important}
+:root{--bg:#0a1d18;--bg2:#0f2a23;--bg3:#16392f;--ivory:#f7f1e3;--gold:#e6c98b;--gold2:#c29a52;--mute:rgba(247,241,227,.68);--line:rgba(247,241,227,.12);--glass:rgba(247,241,227,.045);--red:#f1a0a0;--green:#9fe0b0}
+html{background:var(--bg)}
+body{font:300 15px/1.8 'Noto Naskh Arabic',Inter,system-ui,sans-serif;color:var(--ivory);padding:14px 14px calc(50px + env(safe-area-inset-bottom,0px));min-height:100vh;
+ background:radial-gradient(60% 40% at 0 0,rgba(36,120,98,.35),transparent 70%),radial-gradient(50% 36% at 100% 100%,rgba(230,201,139,.12),transparent 70%),var(--bg);background-attachment:fixed}
+button{font:inherit;border:0;background:none;color:inherit;cursor:pointer}
+.w{max-width:560px;margin:0 auto}
+.cap{display:block;font:500 11px Inter,sans-serif;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);direction:ltr}
+.brandname{display:block;font:600 40px/1.2 'Cormorant Garamond',serif;letter-spacing:.3em;padding-inline-start:.3em;direction:ltr;background:linear-gradient(90deg,var(--gold),#fff3d1,var(--gold2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.ring{display:inline-grid;place-items:center;width:92px;height:92px;border-radius:50%;background:radial-gradient(circle at 50% 40%,var(--bg3),var(--bg));border:1px solid rgba(230,201,139,.5);box-shadow:0 14px 34px rgba(0,0,0,.4)}.ring img{height:52px;width:auto;display:block}
+label{display:block;font-weight:600;font-size:13.5px;margin:16px 0 6px;color:var(--ivory)}
+input:not([type=checkbox]):not([type=radio]),select,textarea{width:100%;padding:12px 18px;border-radius:18px;border:1px solid var(--line);background:var(--bg2);color:var(--ivory);font:400 15px/1.6 Inter,'Noto Naskh Arabic',sans-serif;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+textarea{resize:vertical;min-height:84px;border-radius:20px}
+input::placeholder,textarea::placeholder{color:rgba(247,241,227,.35)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(230,201,139,.16)}
+.ltr{direction:ltr;text-align:start}
+.go{position:relative;overflow:hidden;display:block;width:100%;margin-top:22px;padding:14px;border-radius:40px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1407;font-weight:600;font-size:16px;box-shadow:0 10px 30px rgba(194,154,82,.3);transition:transform .2s}
+.go:active{transform:scale(.97)}.go:disabled{opacity:.55}
+.ghost{padding:6px 16px;border-radius:30px;background:var(--glass);border:1px solid var(--line);font-size:13px;font-weight:600;color:var(--ivory);display:inline-block;transition:.25s}.ghost:hover{border-color:var(--gold);color:var(--gold)}
+.msg{min-height:24px;margin-top:10px;text-align:center;color:var(--gold);font-weight:600;font-size:13.5px}
+.lg{min-height:calc(100vh - 40px);display:grid;place-items:center}
+.lg-card{width:100%;max-width:400px;text-align:center;padding:34px 24px 26px;border-radius:32px;background:var(--glass);border:1px solid var(--line);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.lg-card label{text-align:start}.lg-card .brandname{margin-top:14px}.lg-card .cap{margin:2px 0 10px}
+.sw{display:flex!important;align-items:center;gap:10px;font-weight:400!important;color:var(--mute)!important;cursor:pointer}.sw input{display:none}
+.sw i{flex:none;width:42px;height:24px;border-radius:99px;background:rgba(247,241,227,.14);position:relative;transition:.25s}
+.sw i::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:.25s}
+.sw input:checked+i{background:linear-gradient(135deg,var(--gold),var(--gold2))}.sw input:checked+i::after{inset-inline-start:21px}
+.bar{position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:20;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 8px 7px 14px;border-radius:99px;background:rgba(10,29,24,.94);border:1px solid var(--line);box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:16px}
+.bb{display:flex;align-items:center;gap:10px;direction:ltr}.bb img{height:30px;width:auto}.bb b{display:block;font:600 16px 'Cormorant Garamond',serif;letter-spacing:.3em;line-height:1.1}.bb .cap{font-size:8.5px;letter-spacing:.34em}
+.bar-r{display:flex;gap:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.st{text-align:center;padding:14px 6px;border-radius:22px;background:var(--glass);border:1px solid var(--line)}
+.st b{display:block;font:600 30px/1.1 'Cormorant Garamond',serif;color:var(--gold)}.st span{font-size:12.5px;color:var(--mute)}
+.panel{position:relative;padding:24px 18px 20px;margin-bottom:16px;border-radius:28px;background:var(--glass);border:1px solid var(--line)}
+.panel::before{content:"";position:absolute;top:-1px;inset-inline:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.panel h2{font:600 24px 'Cormorant Garamond','Noto Naskh Arabic',serif;margin-bottom:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{margin:0!important;cursor:pointer}.chip input{display:none}
+.chip span{display:block;min-width:46px;text-align:center;padding:6px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);font-weight:500;font-size:13.5px;color:var(--mute);transition:.2s}
+.chip input:checked+span{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1407;border-color:transparent;font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.two label:first-child{margin-top:16px}
+.hint{font-size:12px;color:var(--mute);font-weight:300;margin-top:4px}
+.drop{display:flex!important;flex-direction:column;align-items:center;gap:2px;padding:20px;border-radius:22px;border:1.5px dashed rgba(230,201,139,.5);background:rgba(230,201,139,.05);text-align:center;color:var(--mute);cursor:pointer;font-weight:300!important}
+.drop b{color:var(--gold);font-size:15px;font-weight:600}.drop input{display:none}
+.pv{display:flex;gap:8px;overflow-x:auto;margin-top:10px}.pv img{flex:none;width:60px;height:74px;object-fit:cover;border-radius:14px;border:1px solid var(--line)}.pv img:first-child{border-color:var(--gold)}
+.tools{display:flex;gap:8px;margin-top:14px}.tools input{flex:1}
+.cats{display:flex;gap:6px;margin:12px 0 4px;overflow-x:auto}.cats button{flex:none;padding:4px 16px;border-radius:99px;border:1px solid var(--line);background:var(--glass);font-size:13px;color:var(--mute)}.cats button.on{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1407;border-color:transparent;font-weight:600}
+.it{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);content-visibility:auto;contain-intrinsic-size:auto 94px}.it:first-child{border-top:0}
+.th{flex:none;width:58px;height:72px;border-radius:16px;overflow:hidden;background:radial-gradient(circle at 50% 38%,var(--bg3),var(--bg2));display:grid;place-items:center;font-size:22px;border:1px solid var(--line)}.th img{width:100%;height:100%;object-fit:cover}
+.in{flex:1;min-width:0}.in small{display:block;font:500 10px Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);direction:ltr;text-align:start}.in b{display:block;font:600 17px/1.3 'Cormorant Garamond','Noto Naskh Arabic',serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pr{font:500 14px Inter,sans-serif;color:var(--gold);direction:ltr;text-align:start}.pr small{display:inline;font-size:10px;letter-spacing:.15em;color:var(--mute)}
+.ch{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}.ch i,.ch em{font-style:normal;font-size:11px;padding:0 9px;border-radius:99px;background:var(--glass);border:1px solid var(--line);color:var(--mute)}.ch em{font-weight:600;border-color:rgba(159,224,176,.4);color:var(--green)}.ch em.x{border-color:rgba(241,160,160,.45);color:var(--red)}
+.it.so .th img{filter:grayscale(1);opacity:.45}.it.so .in b{opacity:.6}
+.ac{display:flex;flex-direction:column;gap:6px}.ac button{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--glass);border:1px solid var(--line);color:var(--gold);transition:.2s}
+.ac button:active{transform:scale(.88)}.ac button.d{color:var(--red)}
+.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.none{text-align:center;color:var(--mute);padding:26px 0}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="w">
+
+<!-- ========== چوونا ژۆر ========== -->
+<div id="login" class="lg"><div class="lg-card">
+<span class="ring"><img src="logo-mark.png" alt=""></span>
+<span class="brandname">ZAHA</span><span class="cap">Admin Panel</span>
+<label>توکنا GitHub</label><input id="tk" class="ltr" type="password" placeholder="github_pat_..." autocomplete="off">
+<label class="sw"><input type="checkbox" id="rm"><i></i><span>توکنێ ل سەر ڤی ئامیری بپارێزە</span></label>
+<button class="go" onclick="signIn()">چوونا ژۆر</button><p id="lm" class="msg"></p></div></div>
+
+<!-- ========== پانێل ========== -->
+<div id="app" hidden>
+<div class="bar"><div class="bb"><img src="logo-mark.png" alt=""><div><b>ZAHA</b><span class="cap">Admin Panel</span></div></div>
+<div class="bar-r"><a class="ghost" href="index.html" target="_blank">وێبسایت</a><button class="ghost" onclick="signOut()">دەرکەفتن</button></div></div>
+<div class="stats" id="stats"></div>
+
+<section class="panel"><span class="cap" style="text-align:start">New perfume</span><h2>عطرەکێ نوی</h2>
+<label>ناڤ</label><input id="n" placeholder="Example | مثال">
+<label>براند (ئارەزوومەندانە)</label><input id="b" class="ltr">
+<label>بەش</label><div class="chips">
+ <label class="chip"><input type="radio" name="cat" value="men" checked><span>پیاوان</span></label>
+ <label class="chip"><input type="radio" name="cat" value="women"><span>ئافرەتان</span></label></div>
+<div class="two"><div><label>نرخ (دینار)</label><input id="p" class="ltr" inputmode="numeric" placeholder="45000"></div>
+<div><label>قەبارە</label><input id="s" class="ltr" placeholder="100ml"></div></div>
+<p class="hint">ئەگەر نرخ نزانی ڤالا بهێلە، دێ بنڤیسیت «نرخ ب پەیوەندیێ».</p>
+<label>نیشانە (ئارەزوومەندانە)</label><input id="tg" class="ltr" placeholder="Free deo / New / Best seller">
+<label>وەسف (ئارەزوومەندانە)</label><textarea id="d"></textarea>
+<label>بۆنێن سەرەکی (ئارەزوومەندانە)</label><input id="nt" class="ltr" placeholder="Oud, Vanilla, Musk"><p class="hint">ب کۆما (,) ژێک جودا بکە.</p>
+<label>وێنە</label><label class="drop"><b>＋ وێنەی هەلبژێرە</b><span>یا ئێکێ دێ بیتە وێنەیێ سەرەکی</span><input id="f" type="file" accept="image/*" multiple></label><div class="pv" id="pv"></div>
+<label class="sw"><input type="checkbox" id="ft"><i></i><span>نیشانکرن ب «هەلبژارتی»</span></label>
+<button class="go" id="ab" onclick="add()">زێدەکرن</button><p id="msg" class="msg"></p></section>
+
+<section class="panel"><span class="cap" style="text-align:start">Collection</span><h2>عطرێن هەین</h2>
+<div class="tools"><input id="q" type="search" placeholder="بگەڕێ..." autocomplete="off"></div>
+<div class="cats" id="cats"></div>
+<div id="list"></div></section>
+</div></div>
+
+<script src="config.js"></script>
+<script>
+const $=id=>document.getElementById(id),say=t=>$('msg').textContent=t,esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const G={o:CFG.GH_OWNER,r:CFG.GH_REPO,b:CFG.GH_BRANCH||''};let TK='',L=[],fq='',fc='all';
+try{TK=localStorage.getItem('tk')||''}catch(e){}
+if(!G.o||!G.r)$('lm').textContent='⚠️ ناڤێ GitHub و repository ل config.js پڕ بکە';
+const num=s=>+String(s).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[^\d]/g,'')||null;
+const api=(p,o={})=>fetch(`https://api.github.com/repos/${G.o}/${G.r}/contents/${p}`,{cache:'no-store',...o,headers:{Authorization:'Bearer '+TK,Accept:'application/vnd.github+json'}});
+const bd=o=>JSON.stringify(G.b?{...o,branch:G.b}:o);
+const enc=s=>{let b='';new TextEncoder().encode(s).forEach(c=>b+=String.fromCharCode(c));return btoa(b)};
+const dec=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\s/g,'')),c=>c.charCodeAt(0)));
+$('f').onchange=()=>{$('pv').innerHTML=[...$('f').files].map(f=>`<img src="${URL.createObjectURL(f)}" alt="">`).join('')};
+
+/* ---------- GitHub ---------- */
+async function get(){const r=await api('products.json'+(G.b?'?ref='+encodeURIComponent(G.b):''));
+ if(r.ok){const j=await r.json();return{data:JSON.parse(dec(j.content)),sha:j.sha}}
+ let m='';try{m=(await r.json()).message||''}catch(e){}
+ if(r.status===401)throw new Error('توکن خەلەتە یان بوویە کۆن');
+ if(r.status===404){
+  const rr=await fetch(`https://api.github.com/repos/${G.o}/${G.r}`,{headers:{Authorization:'Bearer '+TK,Accept:'application/vnd.github+json'}});
+  if(!rr.ok)throw new Error('repository نەهاتە دیتن. GH_OWNER و GH_REPO ل config.js ڕاست بکە، و ببینە توکن مافێ ڤی repositoryی هەیە');
+  if(/ref|branch|commit/i.test(m))throw new Error('branch نەهاتە دیتن. GH_BRANCH ل config.js بگۆڕە (main یان master) یان ڤالا بهێلە');
+  return{data:[]}}
+ throw new Error('GitHub '+r.status+(m?': '+m:''))}
+async function mutate(fn,msg){const {data,sha}=await get(),nd=fn(data);
+ const r=await api('products.json',{method:'PUT',body:bd({message:msg,content:enc(JSON.stringify(nd,null,1)),sha})});
+ if(!r.ok)throw new Error((await r.json()).message||r.status);return nd}
+function shrink(file){return new Promise(r=>{const i=new Image();i.onload=()=>{const k=Math.min(1,900/i.width),c=document.createElement('canvas');c.width=Math.round(i.width*k);c.height=Math.round(i.height*k);c.getContext('2d').drawImage(i,0,0,c.width,c.height);c.toBlob(r,'image/jpeg',.82)};i.src=URL.createObjectURL(file)})}
+async function upImg(f){const b=await shrink(f),data=await new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result.split(',')[1]);x.readAsDataURL(b)}),path='images/'+Date.now()+Math.random().toString(36).slice(2,6)+'.jpg';
+ const r=await api(path,{method:'PUT',body:bd({message:'add image',content:data})});
+ if(!r.ok)throw new Error((await r.json()).message||r.status);return path}
+
+/* ---------- چوونا ژۆر / دەرکەفتن ---------- */
+async function show(){if(!TK){$('login').hidden=false;$('app').hidden=true;return}
+ try{L=(await get()).data;$('lm').textContent='';$('login').hidden=true;$('app').hidden=false;draw()}catch(e){$('lm').textContent=e.message;$('login').hidden=false;$('app').hidden=true}}
+function signIn(){TK=$('tk').value.trim();if(!TK){$('lm').textContent='توکنێ بنڤیسە';return}$('lm').textContent='دهێتە پشکنین...';try{if($('rm').checked)localStorage.setItem('tk',TK)}catch(e){}show()}
+function signOut(){TK='';try{localStorage.removeItem('tk')}catch(e){}$('tk').value='';show()}
+
+/* ---------- زێدەکرن ---------- */
+async function add(){const n=$('n').value.trim();if(!n)return alert('ناڤی بنڤیسە');
+ $('ab').disabled=true;
+ try{say('وێنە دهێنە بارکرن...');const im=[];for(const f of $('f').files)im.push(await upImg(f));
+  say('عطر دهێتە پاراستن...');
+  const o={id:Date.now(),cat:document.querySelector('input[name=cat]:checked').value,name:n,brand:$('b').value.trim(),size:$('s').value.trim(),price:num($('p').value),
+   desc:$('d').value.trim(),notes:$('nt').value.split(/[,،]/).map(x=>x.trim()).filter(Boolean),img:im[0]||'',imgs:im.slice(1),tag:$('tg').value.trim(),featured:$('ft').checked,stock:true};
+  L=await mutate(d=>[o,...d],'add perfume');
+  ['n','b','p','s','tg','d','nt','f'].forEach(k=>$(k).value='');$('pv').innerHTML='';$('ft').checked=false;
+  say('✅ زێدە بوو! دەمەکێ کێم خوو بگرە هەتا وێبسایت نوی دبیت');draw()}
+ catch(e){say('خەلەتی: '+e.message)}$('ab').disabled=false}
+
+/* ---------- نرخ / بەردەستبوون / سڕین ---------- */
+async function act(id,t){try{let pr;
+ if(t==='d'&&!confirm('تو پشتڕاستی دڤێت ڤی عطری ژێ ببەی؟'))return;
+ if(t==='p'){const v=prompt('نرخێ نوی (دینار):');if(v===null)return;pr=num(v)}
+ say('دهێتە پاراستن...');
+ L=await mutate(d=>t==='d'?d.filter(p=>p.id!=id):d.map(p=>p.id!=id?p:t==='s'?{...p,stock:p.stock===false}:{...p,price:pr}),'update perfume');
+ say('✅ هاتە پاراستن');draw()}catch(e){say('خەلەتی: '+e.message)}}
+
+/* ---------- نیشاندان ---------- */
+const I=d=>`<svg class="i" viewBox="0 0 24 24">${d}</svg>`,
+ ic={p:I('<path d="M4 20h4L19 9l-4-4L4 16v4z"/>'),ok:I('<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>'),no:I('<circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/>'),d:I('<path d="M5 7h14M10 11v6M14 11v6M7 7l1 13h8l1-13M9 7V4h6v3"/>')};
+const norm=t=>String(t||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u064b-\u065f\u0640]/g,'');
+const CN={men:'پیاوان',women:'ئافرەتان'};
+function setC(c){fc=c;drawList()}
+function draw(){const so=L.filter(p=>p.stock===false).length;
+ $('stats').innerHTML=`<div class="st"><b>${L.length}</b><span>عطر</span></div><div class="st"><b>${L.length-so}</b><span>ئامادە</span></div><div class="st"><b>${so}</b><span>تەمام بوو</span></div>`;
+ $('cats').innerHTML=[['all','هەمی'],['men','پیاوان'],['women','ئافرەتان']].map(([k,v])=>`<button class="${fc===k?'on':''}" onclick="setC('${k}')">${v}</button>`).join('');
+ drawList()}
+function drawList(){
+ document.querySelectorAll('#cats button').forEach((b,i)=>b.classList.toggle('on',['all','men','women'][i]===fc));
+ const q=norm(fq).trim(),rows=L.filter(p=>(fc==='all'||p.cat===fc)&&(!q||norm([p.name,p.brand,p.size,p.tag].join(' ')).includes(q)));
+ $('list').innerHTML=rows.map(p=>{const so=p.stock===false;return `<div class="it${so?' so':''}"><div class="th">${p.img?`<img src="${esc(p.img)}" loading="lazy" decoding="async" alt="">`:'🧴'}</div><div class="in">${p.brand?`<small>${esc(p.brand)}</small>`:''}<b>${esc(p.name)}</b><div class="pr">${p.price?p.price.toLocaleString('en')+' <small>IQD</small>':'—'}</div><div class="ch">${p.cat?`<i>${CN[p.cat]||esc(p.cat)}</i>`:''}${p.size?`<i>${esc(p.size)}</i>`:''}${p.tag?`<i>${esc(p.tag)}</i>`:''}${so?'<em class="x">تەمام بوو</em>':'<em>ئامادە</em>'}</div></div><div class="ac"><button title="نرخ" onclick="act(${+p.id},'p')">${ic.p}</button><button title="${so?'ئامادەیە':'تەمام بوو'}" onclick="act(${+p.id},'s')">${so?ic.ok:ic.no}</button><button class="d" title="سڕین" onclick="act(${+p.id},'d')">${ic.d}</button></div></div>`}).join('')||'<p class="none">هیچ عطرەک نەهاتە دیتن</p>'}
+let qt;$('q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{fq=e.target.value;drawList()},150)});
+show();
+</script></body></html>
