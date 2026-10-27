@@ -162,7 +162,7 @@
   return {sub:sub,unk:unk,fee:fee,label:label,total:sub+(fee||0),tbc:unk||(zone==='other')};
  }
  function cartMsg(ls){
-  var c=calc(ls),lines=[K('Hello 🌿','سلاڤ 🌿'),K('I would like to order from the ZAHA website:','ئەز دڤێم ژ وێبسایتێ ZAHA داخاز بکەم:'),''];
+  var c=calc(ls),lines=[K('Hello 🌿','سلاڤ 🌿'),K('I would like to order from the ZAHA website:','من دڤێت ژ وێبسایتێ ZAHA داخاز بکەم:'),''];
   ls.forEach(function(x,i){
    var p=x.p,t=(i+1)+'. '+p.name;if(p.brand)t+=' ('+p.brand+')';if(p.size)t+=' – '+p.size;lines.push(t);
    var pt=priceText(p);lines.push('   '+K('Qty: ','ژمارە: ')+x.q+(pt?' × '+pt:''));
@@ -174,7 +174,7 @@
   else if(c.fee!=null)lines.push(K('Delivery: ','گەهاندن: ')+fmt(c.fee));
   lines.push(K('Total: ','کوژمێ گشتی: ')+fmt(c.total)+(c.tbc?K(' + to be confirmed',' + دێ هێتە پشتڕاستکرن'):''));
   lines.push('');
-  lines.push(K('📍 Location: ','📍 شوێن: ')+(c.label||'-'));
+  lines.push(K('📍 Location: ','📍 شوێنن: ')+(c.label||'-'));
   return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
  }
  function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');try{el.focus()}catch(e){}}
@@ -259,19 +259,19 @@
  /* ===================== LANGUAGE (English / Kurdish Bahdini) ===================== */
  var KU={
   order_h:'داخاز بکە',
-  sub:'عطرێن ب کوالیتیا بلند دگەهنە دەرگەهێ مالا تە د هەمی عێراقێ و هەرێما کوردستانێ دا.',
-  shop:'عطران ببینە',wa:'واتسئاپ',
-  col:'کۆمەلە',ours:'عطرێن مە',
+  sub:'گولاڤێن ب کوالیتیا بلند دگەهنە دەرگەهێ مالا تە د هەمی عێراقێ و هەرێما کوردستانێ دا.',
+  shop:'گولاڤان ببینە',wa:'واتسئاپ',
+  col:'کۆمەلە',ours:'گولاڤێن مە',
   how:'چاوا داخاز بکەم',three:'سێ پێنگاڤێن سادە',
-  s1h:'هەلبژێرە',s1p:'عطرەکێ ڤەکە و هەمی وردەکاریان ببینە.',
-  s2h:'داخاز بکە',s2p:'ب ئێک کلیک ل واتسئاپێ بۆ مە دهێتە فرێکرن.',
+  s1h:'هەلبژێرە',s1p:'گولاڤەکێ ڤەکە و هەمی وردەکاریان ببینە.',
+  s2h:'داخاز بکە',s2p:'ب ئێک کلیک ل واتسئاپی بۆ مە دهێتە فرێکرن.',
   s3h:'دگەهیتە دەستێ تە',s3p:'ڕاستەوخۆ دگەهیتە دەرگەهێ مالا تە د عێراق و کوردستانێ دا.',
   ab:'دەربارەی مە',abh:'ڕەفاهیەت، ل دەرگەهێ مالا تە',
-  abp:'ZAHA Perfume & Care د ساڵا ٢٠٢٤ دا هاتیە دامەزراندن. فرۆشگەهەکا ئۆنلاینا ڕەفاهیەتێیە و عطرێن ب کوالیتیا بلند، بەرهەمێن چاودێریا پێستی، بەرهەمێن چاودێریا کەسی و دیاریێن جوان پێشکێش دکەت، ب کرینەکا ساناهی و خۆش.',
-  f1:'کوالیتیا بلند',f1s:'ب ئاگاهی هاتینە هەلبژارتن.',
+  abp:'ZAHA Perfume & Care د ساڵا ٢٠٢٤ دا هاتیە دامەزراندن. فرۆشگەهەکا ئۆنلاینا گولاڤێن ب کوالیتیا بلند، و دیاریێن جوان پێشکێش دکەت، ب کرینەکا ساناهی و خۆش.',
+  f1:'کوالیتیا بلند',f1s:'بتنێ تشتێ ورجینال دێ بینی .',
   f2:'خزمەتگوزاریا تایبەت',f2s:'هاریکاریا کەسی ل سەر واتسئاپ.',
-  f3:'گەهاندن د عێراق و کوردستانێ دا',f3s:'ڕاستەوخۆ بۆ دەرگەهێ مالا تە.',
-  ct:'پەیوەندی',cth:'بۆنا خۆیا تایبەت بدۆزە',ctp:'نامەکێ بۆ مە فرێکە و ئەم دێ هاریکاریا تە کەین دا تو هەلبژێری.',cwa:'چات ل سەر واتسئاپ'
+  f3:'گەهاندن د عێراق و کوردستانێ دا',f3s:'گەهاندنەکا بلەز و ب ساناهی بۆ دەرگەهێ مالا تە.',
+  ct:'پەیوەندی',cth:'بێهنا خۆیا تایبەت ببینە',ctp:'نامەکێ بۆ مە فرێکە و ئەم دێ هاریکاریا تە کەین دا تو هەلبژێری.',cwa:'چات ل سەر واتسئاپ'
  };
  var langBtn=document.getElementById('langBtn'),metaD=document.querySelector('meta[name=description]'),metaEn=metaD?metaD.content:'';
  function applyLang(){
@@ -280,10 +280,10 @@
    if(e.dataset.en==null)e.dataset.en=e.innerHTML;
    e.innerHTML=(lang==='ku'&&KU[e.dataset.t])?KU[e.dataset.t]:e.dataset.en;
   });
-  qi.placeholder=K('Search perfumes…','بگەڕە ل عطران…');
-  qi.setAttribute('aria-label',K('Search perfumes','بگەڕە ل عطران'));
-  document.title=K('ZAHA | Perfume & Care','ZAHA | عطر و چاودێری');
-  if(metaD)metaD.content=K(metaEn,'ZAHA Perfume & Care: عطرێن ب کوالیتیا بلند د هەمی عێراق و هەرێما کوردستانێ دا دگەهنە دەرگەهێ مالا تە.');
+  qi.placeholder=K('Search perfumes…',' ل گولاڤا خوا تایبەت بگەرە …');
+  qi.setAttribute('aria-label',K('Search perfumes','بگەرە ل گولاڤان'));
+  document.title=K('ZAHA | Perfume & Care','ZAHA | گولاڤ و چاودێری');
+  if(metaD)metaD.content=K(metaEn,'ZAHA Perfume & Care: گولاڤێن ب کوالیتیا بلند د هەمی عێراق و هەرێما کوردستانێ دا دگەهنە دەرگەهێ مالا تە.');
   langBtn.textContent=lang==='ku'?'EN':'کوردی';
   U=mkU();
   if(loaded)render();
