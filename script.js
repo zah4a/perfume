@@ -25,11 +25,13 @@
   if(bg)box.style.setProperty('--bgimg','url("'+src+'")');
   var i=document.createElement('img');i.alt=name||'';i.loading='lazy';i.decoding='async';i.onerror=ph;i.src=src;box.insertAdjacentElement('afterbegin',i);
  }
+ function absUrl(u){try{return new URL(u,location.href).href}catch(e){return u}}
  function msg(p){
   var lines=['Hello 🌿','I would like to order this perfume from the ZAHA website:','','• Name: '+p.name];
   if(p.brand)lines.push('• Brand: '+p.brand);
   if(p.size)lines.push('• Size: '+p.size);
   lines.push('• Price: '+(priceText(p)||'Please confirm'));
+  var im0=imgs(p)[0];if(im0)lines.push('• Photo: '+absUrl(im0));
   return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
  }
  function pr(c,p){var e=mk('div',c),t=priceText(p);if(!t){e.textContent=L('ask');return e}var m=t.match(/^(.*?)\s*(IQD)$/i);if(m){e.appendChild(document.createTextNode(m[1]));e.appendChild(mk('small','',m[2].toUpperCase()))}else e.textContent=t;return e}
@@ -72,7 +74,9 @@
   var o=mk('a','order'+(inStock(p)?'':' off'));
   if(inStock(p)){o.href=msg(p);o.target='_blank';o.rel='noopener';o.innerHTML=WA;o.appendChild(mk('span','',L('order')))}
   else o.appendChild(mk('span','',L('soldBtn')));
-  var bar=mk('div','dt-bar');bar.appendChild(o);dtBody.appendChild(bar);
+  var bar=mk('div','dt-bar');
+  if(inStock(p)){var ab=mk('button','addc');ab.type='button';ab.innerHTML=BAG;ab.appendChild(mk('span','',U.add));ab.onclick=function(){addToCart(p.id)};bar.appendChild(ab)}
+  bar.appendChild(o);dtBody.appendChild(bar);
  }
  var lockY=0,locked=false;
  function lock(){if(locked)return;locked=true;lockY=window.scrollY||document.documentElement.scrollTop||0;var b=document.body.style;b.position='fixed';b.top=(-lockY)+'px';b.left='0';b.right='0';b.width='100%'}
@@ -108,13 +112,136 @@
  dt.onclick=function(e){if(e.target===dt)closeDetail()};
  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(dt.classList.contains('on'))closeDetail()}});
 
+ /* ===================== CART ===================== */
+ var Z=(typeof ZONES!=='undefined')?ZONES:{},CK='zaha_cart_v1',cart=[],zone='',zoneTxt='';
+ var ct=document.getElementById('ct'),ctBody=document.getElementById('ctBody'),cc=document.getElementById('cc'),toastEl=document.getElementById('toast'),toastT=null;
+ var BAG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
+ var U={add:'Add to cart',added:'Added to cart ✓',cart:'Your cart',empty:'Your cart is empty',browse:'Browse perfumes',where:'Where are you?',pick:'Choose your location…',other:'Other place',otherPh:'Write your place (city / village / area)',
+  prods:'Products',deliv:'Delivery',total:'Total',tbc:'To be confirmed',send:'Send order on WhatsApp',clear:'Clear cart'};
+ try{var sv=JSON.parse(localStorage.getItem(CK)||'{}');cart=Array.isArray(sv.items)?sv.items:[];zone=sv.zone||'';zoneTxt=sv.zt||''}catch(e){}
+ function saveCart(){try{localStorage.setItem(CK,JSON.stringify({items:cart,zone:zone,zt:zoneTxt}))}catch(e){}}
+ function byId(id){for(var i=0;i<PRODUCTS.length;i++)if(PRODUCTS[i].id===id)return PRODUCTS[i]}
+ function priceNum(p){var v=p.price;if(typeof v==='number')return v>0?v:0;var n=parseInt(String(v||'').replace(/[^\d]/g,''),10);return n>0?n:0}
+ function fmt(n){return n.toLocaleString('en')+' IQD'}
+ function cartCount(){return cart.reduce(function(a,x){return a+x.q},0)}
+ function cartLines(){var out=[];cart.forEach(function(x){var p=byId(x.id);if(p&&inStock(p))out.push({p:p,q:x.q})});return out}
+ function badge(bump){var n=cartCount();cc.textContent=n;cc.hidden=!n;if(bump){cc.classList.remove('bump');void cc.offsetWidth;cc.classList.add('bump')}}
+ /* drop items that no longer exist / sold out (after products load) */
+ function cartSync(){
+  if(PRODUCTS.length){cart=cart.filter(function(x){var p=byId(x.id);return p&&inStock(p)});saveCart()}
+  badge(false);
+ }
+ function toast(t){toastEl.textContent=t;toastEl.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('on')},1800)}
+ function addToCart(id){
+  var f=null;cart.forEach(function(x){if(x.id===id)f=x});
+  if(f){if(f.q<20)f.q++}else cart.push({id:id,q:1});
+  saveCart();badge(true);toast(U.added);
+ }
+ function setQty(id,d){
+  cart.forEach(function(x){if(x.id===id)x.q=Math.max(1,Math.min(20,x.q+d))});
+  saveCart();badge(false);renderCart();
+ }
+ function removeItem(id){cart=cart.filter(function(x){return x.id!==id});saveCart();badge(false);renderCart()}
+ function clearCart(){cart=[];saveCart();badge(false);renderCart()}
+ function calc(ls){
+  var sub=0,unk=false;
+  ls.forEach(function(x){var n=priceNum(x.p);if(n)sub+=n*x.q;else unk=true});
+  var fee=null,label='';
+  if(zone&&Z[zone]){fee=Z[zone].fee;label=Z[zone].en||Z[zone].ku||zone}
+  else if(zone==='other'){label=zoneTxt.trim()}
+  return {sub:sub,unk:unk,fee:fee,label:label,total:sub+(fee||0),tbc:unk||(zone==='other')};
+ }
+ function cartMsg(ls){
+  var c=calc(ls),lines=['Hello 🌿','I would like to order from the ZAHA website:',''];
+  ls.forEach(function(x,i){
+   var p=x.p,t=(i+1)+'. '+p.name;if(p.brand)t+=' ('+p.brand+')';if(p.size)t+=' – '+p.size;lines.push(t);
+   var pt=priceText(p);lines.push('   Qty: '+x.q+(pt?' × '+pt:''));
+   var im=imgs(p)[0];if(im)lines.push('   Photo: '+absUrl(im));
+   lines.push('');
+  });
+  lines.push('Products: '+fmt(c.sub)+(c.unk?' + items to be confirmed':''));
+  if(zone==='other')lines.push('Delivery: to be confirmed');
+  else if(c.fee!=null)lines.push('Delivery: '+fmt(c.fee));
+  lines.push('Total: '+fmt(c.total)+(c.tbc?' + to be confirmed':''));
+  lines.push('');
+  lines.push('📍 Location: '+(c.label||'-'));
+  return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
+ }
+ function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');try{el.focus()}catch(e){}}
+ function renderCart(){
+  ctBody.replaceChildren();
+  ctBody.appendChild(mk('h3','ct-h',U.cart));
+  var ls=cartLines();
+  if(!ls.length){
+   ctBody.appendChild(mk('div','ct-empty',U.empty));
+   var bb=mk('button','btn fill ct-go',U.browse);bb.type='button';bb.onclick=closeCart;ctBody.appendChild(bb);
+   return;
+  }
+  var list=mk('div','cl');
+  ls.forEach(function(x){
+   var p=x.p,r=mk('div','ci'),th=mk('div','cth');pic(th,imgs(p)[0],p.name,false);
+   var inf=mk('div','cin');if(p.brand)inf.appendChild(mk('div','pbrand',p.brand));
+   inf.appendChild(mk('b','',p.name));
+   var sm=[p.size,priceText(p)].filter(Boolean).join(' · ');inf.appendChild(mk('span','',sm||L('ask')));
+   var q=mk('div','qt'),mi=mk('button','','−'),pl=mk('button','','+');mi.type=pl.type='button';
+   mi.setAttribute('aria-label','-');pl.setAttribute('aria-label','+');
+   mi.onclick=function(){x.q>1?setQty(p.id,-1):removeItem(p.id)};pl.onclick=function(){setQty(p.id,1)};
+   q.append(mi,mk('span','',x.q),pl);
+   var rm=mk('button','rm','✕');rm.type='button';rm.setAttribute('aria-label','Remove');rm.onclick=function(){removeItem(p.id)};
+   r.append(th,inf,q,rm);list.appendChild(r);
+  });
+  ctBody.appendChild(list);
+  /* location + summary */
+  var zb=mk('label','zb'),zl=mk('span','',U.where),sel=document.createElement('select');sel.className='zs';
+  var o0=mk('option','',U.pick);o0.value='';sel.appendChild(o0);
+  Object.keys(Z).forEach(function(k){var o=mk('option','',(Z[k].en||Z[k].ku||k));o.value=k;sel.appendChild(o)});
+  var oo=mk('option','',U.other);oo.value='other';sel.appendChild(oo);
+  sel.value=zone;zb.append(zl,sel);ctBody.appendChild(zb);
+  var zx=document.createElement('input');zx.className='zx';zx.placeholder=U.otherPh;zx.value=zoneTxt;zx.hidden=(zone!=='other');ctBody.appendChild(zx);
+  var sum=mk('div','sum'),sS=mk('b'),sD=mk('b'),sT=mk('b');
+  function row(l,b,c){var d=mk('div',c||'');d.append(mk('span','',l),b);sum.appendChild(d)}
+  row(U.prods,sS);row(U.deliv,sD);row(U.total,sT,'tot');ctBody.appendChild(sum);
+  var go=mk('a','btn fill ct-wa');go.target='_blank';go.rel='noopener';go.innerHTML=WA;go.appendChild(mk('span','',U.send));
+  var cl=mk('button','btn ct-clear',U.clear);cl.type='button';cl.onclick=clearCart;
+  var acts=mk('div','acts');acts.append(go,cl);ctBody.appendChild(acts);
+  function upd(){
+   var c=calc(ls);
+   sS.textContent=fmt(c.sub)+(c.unk?' +':'');
+   sD.textContent=zone==='other'?U.tbc:(c.fee!=null?fmt(c.fee):'—');
+   sT.textContent=fmt(c.total)+(c.tbc?' +':'');
+   go.href=cartMsg(ls);
+  }
+  sel.onchange=function(){zone=sel.value;zx.hidden=(zone!=='other');saveCart();upd();if(zone==='other')zx.focus()};
+  zx.oninput=function(){zoneTxt=zx.value;saveCart();upd()};
+  go.addEventListener('click',function(e){
+   if(!zone){e.preventDefault();shake(sel);return}
+   if(zone==='other'&&!zoneTxt.trim()){e.preventDefault();shake(zx);return}
+  });
+  upd();
+ }
+ function openCart(){
+  if(ct.classList.contains('on'))return;
+  if(dt.classList.contains('on'))return;
+  renderCart();
+  try{history.scrollRestoration='manual';history.pushState({zc:1},'')}catch(e){}
+  lock();ct.classList.add('on');ct.setAttribute('aria-hidden','false');ct.firstElementChild.scrollTop=0;
+ }
+ function closeCart(){if(!ct.classList.contains('on'))return;if(history.state&&history.state.zc){history.back();return}hideCart()}
+ function hideCart(){ct.classList.remove('on');ct.setAttribute('aria-hidden','true');unlock()}
+ window.addEventListener('popstate',function(){if(ct.classList.contains('on'))hideCart()});
+ document.getElementById('cartBtn').onclick=openCart;
+ document.getElementById('ctX').onclick=closeCart;
+ ct.onclick=function(e){if(e.target===ct)closeCart()};
+ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&ct.classList.contains('on'))closeCart()});
+ badge(false);
+
  /* ===== load products from products.json (managed by admin.html) ===== */
  function load(){
   grid.appendChild(mk('div','empty','…'));
   fetch('products.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []}).then(function(d){
    PRODUCTS=Array.isArray(d)?d:[];
    PRODUCTS.forEach(function(p){p._s=norm([p.name,p.brand,p.size,(p.notes||[]).join(' '),p.desc,priceText(p)].join(' '))});
-   render();
+   render();cartSync();
   });
  }
  load();

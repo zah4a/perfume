@@ -6,3 +6,10 @@ const CFG = {
   GH_REPO: "perfume",    // ناڤێ repository
   GH_BRANCH: ""   // ڤالا بهێلە = branchا سەرەکی (main یان master)
 };
+
+// 🚚 نرخێ گەهاندنێ ب پێی شوێنی (دینار). بۆ گۆڕینا نرخان تنێ ڤان ژمارا بگۆڕە.
+// ئەگەر شوێنەکێ دی بڤێت، لێرە بەرزە بکە: key: { fee: 5000, en: "Erbil", ku: "هەولێر" }
+const ZONES = {
+  duhok: { fee: 3000, en: "Duhok", ku: "دهۆک" },
+  zakho: { fee: 4000, en: "Zakho", ku: "زاخۆ" }
+};

@@ -9,14 +9,14 @@
 <meta name="description" content="ZAHA Perfume &amp; Care: premium perfumes delivered across Iraq and the Kurdistan Region.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500&amp;family=Noto+Naskh+Arabic:wght@400;600&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <div class="splash" aria-hidden="true"><img src="logo-mark.png" alt=""></div>
 <div class="prog" id="prog"></div>
 <header><div class="wrap bar">
 <a class="logo" href="#top"><img src="logo-mark.png" alt=""><span>ZAHA</span></a>
-<div class="tools"><a class="pill solid" href="https://wa.me/9647509316163" target="_blank" rel="noopener">Order</a></div>
+<div class="tools"><button type="button" class="cartbtn" id="cartBtn" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="bd" id="cc" hidden>0</span></button><a class="pill solid" href="https://wa.me/9647509316163" target="_blank" rel="noopener">Order</a></div>
 </div></header>
 <main id="top">
 <div class="hero"><i class="glow g1"></i><i class="glow g2"></i><div class="wrap">
@@ -78,7 +78,10 @@
 
 <div class="dt" id="dt" aria-hidden="true"><div class="dt-sheet" role="dialog" aria-modal="true"><button type="button" class="dt-x" id="dtX" aria-label="Close">✕</button><div id="dtBody"></div></div></div>
 
+<div class="dt" id="ct" aria-hidden="true"><div class="dt-sheet" role="dialog" aria-modal="true"><button type="button" class="dt-x" id="ctX" aria-label="Close">✕</button><div class="ct-in" id="ctBody"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script src="config.js"></script>
-<script src="script.js?v=2" defer></script>
+<script src="script.js?v=3" defer></script>
 </body>
 </html>

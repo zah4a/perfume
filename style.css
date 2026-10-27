@@ -233,3 +233,72 @@ html{overflow-anchor:none}
 
 /* ===== phones: fewer always-running effects ===== */
 @media(max-width:700px){.glow{animation:none}.btn.fill::after{animation-duration:6s}}
+
+
+/* ===== FIX: whole photo visible (nothing cropped, no zoom-in) ===== */
+.pimg{aspect-ratio:3/4;position:relative}
+.dt-img{aspect-ratio:auto;height:clamp(250px,44vh,400px);position:relative}
+/* the real cause of the cropped/huge photo: height:100% inside a grid cell was ignored -> pin the image to the box */
+.pimg img,.dt-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain!important;padding:8px}
+.dt.on .dt-img img{animation:none}
+.thumbs img{object-fit:contain;background:var(--bg3)}
+
+/* ===== cart button in header ===== */
+.cartbtn{position:relative;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--glass);display:grid;place-items:center;color:var(--gold);cursor:pointer;transition:.3s}
+.cartbtn:hover{border-color:var(--gold)}
+.cartbtn svg{width:20px;height:20px}
+.bd{position:absolute;top:-5px;inset-inline-end:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:99px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1407;font:600 11px/19px Inter,system-ui,sans-serif;text-align:center}
+.bd.bump{animation:bump .45s}
+@keyframes bump{50%{transform:scale(1.55)}}
+
+/* ===== add-to-cart + order buttons in detail ===== */
+.dt-bar{display:flex;flex-direction:column;gap:8px}
+.addc{display:flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:40px;padding:14px;font-weight:500;font-size:16px;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#1b1407;box-shadow:0 10px 30px rgba(194,154,82,.28)}
+.addc svg{width:22px;height:22px}
+.dt-bar .order{padding:13px}
+.dt-bar .order::after{display:none}
+
+/* ===== cart sheet ===== */
+.ct-in{padding:26px 22px calc(22px + env(safe-area-inset-bottom,0px))}
+.ct-h{font-size:30px;line-height:1.2;margin-bottom:14px;padding-inline-end:44px}
+.ct-empty{text-align:center;color:var(--mute);padding:34px 0 22px}
+.ct-go{display:block;margin:0 auto}
+.cl{display:flex;flex-direction:column;gap:10px}
+.ci{display:flex;align-items:center;gap:10px;padding:8px;border-radius:20px;background:var(--glass);border:1px solid var(--line)}
+.cth{flex:none;width:58px;height:68px;border-radius:14px;overflow:hidden;background:radial-gradient(circle at 50% 36%,var(--bg3),var(--bg));display:grid;place-items:center}
+.cth img{width:100%;height:100%;object-fit:contain;display:block}
+.cth svg.ph{width:30px;height:42px;color:var(--gold);opacity:.65}
+.cin{flex:1;min-width:0;line-height:1.35}
+.cin .pbrand{font-size:9.5px}
+.cin b{display:block;font-weight:500;font-size:15px}
+.cin span{font-size:13px;color:var(--gold)}
+.qt{display:flex;align-items:center;gap:6px}
+.qt button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--glass);cursor:pointer;font-size:16px;line-height:1}
+.qt span{min-width:16px;text-align:center;font-weight:500}
+.rm{width:28px;height:28px;flex:none;border-radius:50%;border:0;background:rgba(247,241,227,.08);cursor:pointer;font-size:12px}
+.zb{display:flex;flex-direction:column;gap:6px;margin-top:18px}
+.zb>span{font-weight:500;font-size:14px}
+.zs,.zx{width:100%;font:400 15px Inter,'Noto Naskh Arabic',system-ui,sans-serif;color:var(--ivory);background-color:var(--bg3);border:1px solid var(--line);border-radius:30px;padding:12px 18px;outline:none}
+.zs{-webkit-appearance:none;appearance:none;cursor:pointer;padding-inline-end:46px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6c98b' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:18px;background-position:right 16px center}
+[dir=rtl] .zs{background-position:left 16px center}
+.zs option{color:#10241f;background:#fff}
+.zx{margin-top:8px}
+.zx[hidden]{display:none}
+.zs:focus,.zx:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(230,201,139,.15)}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.sum{display:flex;flex-direction:column;gap:4px;margin-top:16px}
+.sum div{display:flex;justify-content:space-between;color:var(--mute)}
+.sum b{font-weight:500;color:var(--ivory)}
+.sum .tot{color:var(--ivory);font-size:17px;border-top:1px dashed var(--mute);padding-top:8px;margin-top:4px}
+.sum .tot b{color:var(--gold);font-size:19px}
+.acts{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.acts .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;font:inherit;font-size:15px;font-weight:500}
+.acts .ct-wa{background:linear-gradient(135deg,#34d27a,#1fae5f);color:#04200f;box-shadow:0 10px 30px rgba(31,174,95,.28);border-color:transparent}
+.acts .ct-wa:hover{color:#04200f}
+.acts .ct-wa::after{display:none}
+.acts .ct-wa svg{width:22px;height:22px}
+
+/* ===== toast ===== */
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:200;translate:-50% 20px;opacity:0;pointer-events:none;background:var(--ivory);color:#10241f;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.3s}
+.toast.on{opacity:1;translate:-50% 0}
