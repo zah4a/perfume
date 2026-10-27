@@ -302,3 +302,18 @@ html{overflow-anchor:none}
 /* ===== toast ===== */
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));z-index:200;translate:-50% 20px;opacity:0;pointer-events:none;background:var(--ivory);color:#10241f;padding:10px 22px;border-radius:30px;font-size:14px;font-weight:500;box-shadow:0 10px 30px rgba(0,0,0,.4);transition:.3s}
 .toast.on{opacity:1;translate:-50% 0}
+
+
+/* ===== language switch + Kurdish (RTL) ===== */
+.pill.lang{padding:4px 14px;font-family:'Noto Naskh Arabic',Inter,sans-serif;font-size:14px;line-height:1.6;color:var(--gold);border-color:rgba(230,201,139,.4)}
+[dir=rtl] .btn,[dir=rtl] .pill,[dir=rtl] .count-line,[dir=rtl] .sub,[dir=rtl] .eyebrow,[dir=rtl] .dt-h{letter-spacing:0}
+[dir=rtl] .pbrand,[dir=rtl] .logo span{direction:ltr;unicode-bidi:isolate}
+[dir=rtl] .pname,[dir=rtl] .dt-in h3,[dir=rtl] .cin b{line-height:1.5}
+[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] .feat b{font-family:'Noto Naskh Arabic','Cormorant Garamond',serif;font-weight:600}
+[dir=rtl] h2{line-height:1.5}
+[dir=rtl] .sb-in input{text-align:start}
+
+/* Kurdish: keep prices as "40,000 IQD" and let the toast breathe */
+[dir=rtl] .pprice,[dir=rtl] .dt-price{direction:ltr;justify-content:flex-end}
+[dir=rtl] .sum b,[dir=rtl] .cin span{direction:ltr;unicode-bidi:isolate}
+.toast{width:max-content;max-width:88vw;text-align:center}

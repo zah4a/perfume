@@ -2,13 +2,17 @@
  var C=typeof CFG!=='undefined'?CFG:{},WHATSAPP=C.WHATSAPP||'9647509316163',
      PRODUCTS=[],grid=document.getElementById('shop'),
      dt=document.getElementById('dt'),dtBody=document.getElementById('dtBody'),curP=null;
+ var lang='en';
+ try{var sl=localStorage.getItem('zaha_lang');if(sl==='ku'||sl==='en')lang=sl;else if(/^(ku|ckb)/i.test(navigator.language||''))lang='ku'}catch(e){}
+ function K(en,ku){return lang==='ku'?ku:en}
  var T={
-  ask:{en:"Ask for price"},order:{en:"Order on WhatsApp"},
-  none:{en:"Perfumes coming soon ♡"},
-  sold:{en:"Sold out"},soldBtn:{en:"Currently unavailable"},
-  avail:{en:"In stock"},notes:{en:"Notes"},about:{en:"About this perfume"}
+  ask:{en:"Ask for price",ku:"نرخ ب پەیوەندیێ"},order:{en:"Order on WhatsApp",ku:"داخازێ ل واتسئاپێ بکە"},
+  none:{en:"Perfumes coming soon ♡",ku:"عطر د زوویی دا دێ هێن ♡"},
+  sold:{en:"Sold out",ku:"نەماوە"},soldBtn:{en:"Currently unavailable",ku:"نوکە بەردەست نینە"},
+  avail:{en:"In stock",ku:"بەردەستە"},notes:{en:"Notes",ku:"بۆنێن سەرەکی"},about:{en:"About this perfume",ku:"دەربارەی ڤی عطری"},
+  nf:{en:"No perfumes found",ku:"چ عطر نەهاتنە دیتن"}
  };
- var L=function(k){return T[k].en};
+ var L=function(k){return T[k][lang]||T[k].en};
  var BT='<svg class="ph" viewBox="0 0 80 110" fill="none" stroke="currentColor" stroke-width="2"><rect x="32" y="4" width="16" height="12" rx="2" fill="currentColor"/><rect x="10" y="24" width="60" height="80" rx="6"/><path d="M22 40h36L22 90h36" stroke-width="3"/></svg>';
  var LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
  var WA='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>';
@@ -27,11 +31,11 @@
  }
  function absUrl(u){try{return new URL(u,location.href).href}catch(e){return u}}
  function msg(p){
-  var lines=['Hello 🌿','I would like to order this perfume from the ZAHA website:','','• Name: '+p.name];
-  if(p.brand)lines.push('• Brand: '+p.brand);
-  if(p.size)lines.push('• Size: '+p.size);
-  lines.push('• Price: '+(priceText(p)||'Please confirm'));
-  var im0=imgs(p)[0];if(im0)lines.push('• Photo: '+absUrl(im0));
+  var lines=[K('Hello 🌿','سلاڤ 🌿'),K('I would like to order this perfume from the ZAHA website:','ئەز دڤێم ڤی عطری ژ وێبسایتێ ZAHA داخاز بکەم:'),'',K('• Name: ','• ناڤ: ')+p.name];
+  if(p.brand)lines.push(K('• Brand: ','• براند: ')+p.brand);
+  if(p.size)lines.push(K('• Size: ','• قەبارە: ')+p.size);
+  lines.push(K('• Price: ','• نرخ: ')+(priceText(p)||K('Please confirm','تکایە پشتڕاست بکە')));
+  var im0=imgs(p)[0];if(im0)lines.push(K('• Photo: ','• وێنە: ')+absUrl(im0));
   return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
  }
  function pr(c,p){var e=mk('div',c),t=priceText(p);if(!t){e.textContent=L('ask');return e}var m=t.match(/^(.*?)\s*(IQD)$/i);if(m){e.appendChild(document.createTextNode(m[1]));e.appendChild(mk('small','',m[2].toUpperCase()))}else e.textContent=t;return e}
@@ -86,8 +90,9 @@
  function hideDetail(){dt.classList.remove('on');dt.setAttribute('aria-hidden','true');curP=null;unlock()}
  window.addEventListener('popstate',function(){if(dt.classList.contains('on'))hideDetail()});
  function norm(t){return String(t||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u064b-\u065f\u0640]/g,'').replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/[^a-z0-9\u0600-\u06ff\s]/g,' ').replace(/\s+/g,' ').trim()}
- var query='',first=true;
+ var query='',first=true,loaded=false;
  function countText(n,total,avail){
+  if(lang==='ku'){if(query)return n+' / '+total+' عطر';return avail+' عطر بەردەستن'+(avail<total?' · '+total+' ل کۆ':'')}
   if(query)return n+' / '+total+' perfumes';
   return avail+' perfumes available'+(avail<total?' · '+total+' total':'');
  }
@@ -97,7 +102,7 @@
   var list=PRODUCTS.filter(function(p){return terms.every(function(t){return p._s.indexOf(t)>-1})});
   document.getElementById('countLine').textContent=total?countText(list.length,total,avail):'';
   var frag=document.createDocumentFragment();
-  if(!list.length)frag.appendChild(mk('div','empty',query?'No perfumes found':L('none')));
+  if(!list.length)frag.appendChild(mk('div','empty',query?L('nf'):L('none')));
   /* entrance animation only for the first screen of cards, only once */
   list.forEach(function(p,i){var c=card(p,first&&i<8);c.style.setProperty('--i',i);frag.appendChild(c)});
   grid.replaceChildren(frag);
@@ -116,8 +121,13 @@
  var Z=(typeof ZONES!=='undefined')?ZONES:{},CK='zaha_cart_v1',cart=[],zone='',zoneTxt='';
  var ct=document.getElementById('ct'),ctBody=document.getElementById('ctBody'),cc=document.getElementById('cc'),toastEl=document.getElementById('toast'),toastT=null;
  var BAG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>';
- var U={add:'Add to cart',added:'Added to cart ✓',cart:'Your cart',empty:'Your cart is empty',browse:'Browse perfumes',where:'Where are you?',pick:'Choose your location…',other:'Other place',otherPh:'Write your place (city / village / area)',
-  prods:'Products',deliv:'Delivery',total:'Total',tbc:'To be confirmed',send:'Send order on WhatsApp',clear:'Clear cart'};
+ function mkU(){return {
+  add:K('Add to cart','بۆ سەبەتێ زێدە بکە'),added:K('Added to cart ✓','بۆ سەبەتێ هاتە زێدەکرن ✓'),cart:K('Your cart','سەبەتا من'),empty:K('Your cart is empty','سەبەتا تە ڤالایە'),
+  browse:K('Browse perfumes','عطران ببینە'),where:K('Where are you?','تو ل کیڤە دژی؟'),pick:K('Choose your location…','شوێنێ خۆ هەلبژێرە…'),other:K('Other place','شوێنەکێ دی'),
+  otherPh:K('Write your place (city / village / area)','جهێ خۆ بنڤیسە (باژێر / گوند / گەڕەک)'),prods:K('Products','کوژمێ بەرهەمان'),deliv:K('Delivery','گەهاندن'),
+  total:K('Total','کوژمێ گشتی'),tbc:K('To be confirmed','دێ هێتە پشتڕاستکرن'),send:K('Send order on WhatsApp','داخازێ ب واتسئاپێ فرێکە'),clear:K('Clear cart','سەبەتێ ڤالا بکە')}}
+ var U=mkU();
+ function zl(k){var z=Z[k]||{};return lang==='ku'?(z.ku||z.en||k):(z.en||z.ku||k)}
  try{var sv=JSON.parse(localStorage.getItem(CK)||'{}');cart=Array.isArray(sv.items)?sv.items:[];zone=sv.zone||'';zoneTxt=sv.zt||''}catch(e){}
  function saveCart(){try{localStorage.setItem(CK,JSON.stringify({items:cart,zone:zone,zt:zoneTxt}))}catch(e){}}
  function byId(id){for(var i=0;i<PRODUCTS.length;i++)if(PRODUCTS[i].id===id)return PRODUCTS[i]}
@@ -147,24 +157,24 @@
   var sub=0,unk=false;
   ls.forEach(function(x){var n=priceNum(x.p);if(n)sub+=n*x.q;else unk=true});
   var fee=null,label='';
-  if(zone&&Z[zone]){fee=Z[zone].fee;label=Z[zone].en||Z[zone].ku||zone}
+  if(zone&&Z[zone]){fee=Z[zone].fee;label=zl(zone)}
   else if(zone==='other'){label=zoneTxt.trim()}
   return {sub:sub,unk:unk,fee:fee,label:label,total:sub+(fee||0),tbc:unk||(zone==='other')};
  }
  function cartMsg(ls){
-  var c=calc(ls),lines=['Hello 🌿','I would like to order from the ZAHA website:',''];
+  var c=calc(ls),lines=[K('Hello 🌿','سلاڤ 🌿'),K('I would like to order from the ZAHA website:','ئەز دڤێم ژ وێبسایتێ ZAHA داخاز بکەم:'),''];
   ls.forEach(function(x,i){
    var p=x.p,t=(i+1)+'. '+p.name;if(p.brand)t+=' ('+p.brand+')';if(p.size)t+=' – '+p.size;lines.push(t);
-   var pt=priceText(p);lines.push('   Qty: '+x.q+(pt?' × '+pt:''));
-   var im=imgs(p)[0];if(im)lines.push('   Photo: '+absUrl(im));
+   var pt=priceText(p);lines.push('   '+K('Qty: ','ژمارە: ')+x.q+(pt?' × '+pt:''));
+   var im=imgs(p)[0];if(im)lines.push('   '+K('Photo: ','وێنە: ')+absUrl(im));
    lines.push('');
   });
-  lines.push('Products: '+fmt(c.sub)+(c.unk?' + items to be confirmed':''));
-  if(zone==='other')lines.push('Delivery: to be confirmed');
-  else if(c.fee!=null)lines.push('Delivery: '+fmt(c.fee));
-  lines.push('Total: '+fmt(c.total)+(c.tbc?' + to be confirmed':''));
+  lines.push(K('Products: ','کوژمێ بەرهەمان: ')+fmt(c.sub)+(c.unk?K(' + items to be confirmed',' + بەرهەمێن نرخ نەدیار'):''));
+  if(zone==='other')lines.push(K('Delivery: to be confirmed','گەهاندن: دێ هێتە پشتڕاستکرن'));
+  else if(c.fee!=null)lines.push(K('Delivery: ','گەهاندن: ')+fmt(c.fee));
+  lines.push(K('Total: ','کوژمێ گشتی: ')+fmt(c.total)+(c.tbc?K(' + to be confirmed',' + دێ هێتە پشتڕاستکرن'):''));
   lines.push('');
-  lines.push('📍 Location: '+(c.label||'-'));
+  lines.push(K('📍 Location: ','📍 شوێن: ')+(c.label||'-'));
   return 'https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(lines.join('\n'));
  }
  function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');try{el.focus()}catch(e){}}
@@ -192,11 +202,11 @@
   });
   ctBody.appendChild(list);
   /* location + summary */
-  var zb=mk('label','zb'),zl=mk('span','',U.where),sel=document.createElement('select');sel.className='zs';
+  var zb=mk('label','zb'),zlab=mk('span','',U.where),sel=document.createElement('select');sel.className='zs';
   var o0=mk('option','',U.pick);o0.value='';sel.appendChild(o0);
-  Object.keys(Z).forEach(function(k){var o=mk('option','',(Z[k].en||Z[k].ku||k));o.value=k;sel.appendChild(o)});
+  Object.keys(Z).forEach(function(k){var o=mk('option','',zl(k));o.value=k;sel.appendChild(o)});
   var oo=mk('option','',U.other);oo.value='other';sel.appendChild(oo);
-  sel.value=zone;zb.append(zl,sel);ctBody.appendChild(zb);
+  sel.value=zone;zb.append(zlab,sel);ctBody.appendChild(zb);
   var zx=document.createElement('input');zx.className='zx';zx.placeholder=U.otherPh;zx.value=zoneTxt;zx.hidden=(zone!=='other');ctBody.appendChild(zx);
   var sum=mk('div','sum'),sS=mk('b'),sD=mk('b'),sT=mk('b');
   function row(l,b,c){var d=mk('div',c||'');d.append(mk('span','',l),b);sum.appendChild(d)}
@@ -241,10 +251,47 @@
   fetch('products.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():[]}).catch(function(){return []}).then(function(d){
    PRODUCTS=Array.isArray(d)?d:[];
    PRODUCTS.forEach(function(p){p._s=norm([p.name,p.brand,p.size,(p.notes||[]).join(' '),p.desc,priceText(p)].join(' '))});
-   render();cartSync();
+   loaded=true;render();cartSync();
   });
  }
  load();
+
+ /* ===================== LANGUAGE (English / Kurdish Bahdini) ===================== */
+ var KU={
+  order_h:'داخاز بکە',
+  sub:'عطرێن ب کوالیتیا بلند دگەهنە دەرگەهێ مالا تە د هەمی عێراقێ و هەرێما کوردستانێ دا.',
+  shop:'عطران ببینە',wa:'واتسئاپ',
+  col:'کۆمەلە',ours:'عطرێن مە',
+  how:'چاوا داخاز بکەم',three:'سێ پێنگاڤێن سادە',
+  s1h:'هەلبژێرە',s1p:'عطرەکێ ڤەکە و هەمی وردەکاریان ببینە.',
+  s2h:'داخاز بکە',s2p:'ب ئێک کلیک ل واتسئاپێ بۆ مە دهێتە فرێکرن.',
+  s3h:'دگەهیتە دەستێ تە',s3p:'ڕاستەوخۆ دگەهیتە دەرگەهێ مالا تە د عێراق و کوردستانێ دا.',
+  ab:'دەربارەی مە',abh:'ڕەفاهیەت، ل دەرگەهێ مالا تە',
+  abp:'ZAHA Perfume & Care د ساڵا ٢٠٢٤ دا هاتیە دامەزراندن. فرۆشگەهەکا ئۆنلاینا ڕەفاهیەتێیە و عطرێن ب کوالیتیا بلند، بەرهەمێن چاودێریا پێستی، بەرهەمێن چاودێریا کەسی و دیاریێن جوان پێشکێش دکەت، ب کرینەکا ساناهی و خۆش.',
+  f1:'کوالیتیا بلند',f1s:'ب ئاگاهی هاتینە هەلبژارتن.',
+  f2:'خزمەتگوزاریا تایبەت',f2s:'هاریکاریا کەسی ل سەر واتسئاپ.',
+  f3:'گەهاندن د عێراق و کوردستانێ دا',f3s:'ڕاستەوخۆ بۆ دەرگەهێ مالا تە.',
+  ct:'پەیوەندی',cth:'بۆنا خۆیا تایبەت بدۆزە',ctp:'نامەکێ بۆ مە فرێکە و ئەم دێ هاریکاریا تە کەین دا تو هەلبژێری.',cwa:'چات ل سەر واتسئاپ'
+ };
+ var langBtn=document.getElementById('langBtn'),metaD=document.querySelector('meta[name=description]'),metaEn=metaD?metaD.content:'';
+ function applyLang(){
+  var h=document.documentElement;h.lang=lang==='ku'?'ku':'en';h.dir=lang==='ku'?'rtl':'ltr';
+  document.querySelectorAll('[data-t]').forEach(function(e){
+   if(e.dataset.en==null)e.dataset.en=e.innerHTML;
+   e.innerHTML=(lang==='ku'&&KU[e.dataset.t])?KU[e.dataset.t]:e.dataset.en;
+  });
+  qi.placeholder=K('Search perfumes…','بگەڕە ل عطران…');
+  qi.setAttribute('aria-label',K('Search perfumes','بگەڕە ل عطران'));
+  document.title=K('ZAHA | Perfume & Care','ZAHA | عطر و چاودێری');
+  if(metaD)metaD.content=K(metaEn,'ZAHA Perfume & Care: عطرێن ب کوالیتیا بلند د هەمی عێراق و هەرێما کوردستانێ دا دگەهنە دەرگەهێ مالا تە.');
+  langBtn.textContent=lang==='ku'?'EN':'کوردی';
+  U=mkU();
+  if(loaded)render();
+  if(dt.classList.contains('on')&&curP)renderDetail();
+  if(ct.classList.contains('on'))renderCart();
+ }
+ langBtn.onclick=function(){lang=lang==='ku'?'en':'ku';try{localStorage.setItem('zaha_lang',lang)}catch(e){}applyLang()};
+ applyLang();
 
  /* stagger reveal */
  document.querySelectorAll('.rv').forEach(function(e){var i=Array.prototype.indexOf.call(e.parentNode.children,e);e.style.transitionDelay=(Math.min(i,5)*90)+'ms'});
