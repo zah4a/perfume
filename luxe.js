@@ -57,9 +57,4 @@
   document.addEventListener('pointermove',function(e){px=e.clientX;py=e.clientY;if(qq)return;qq=true;requestAnimationFrame(function(){
    document.documentElement.style.setProperty('--cx',px+'px');document.documentElement.style.setProperty('--cy',py+'px');qq=false})},{passive:true});
  }
- /* blurred photo backdrop behind each product photo (fills the empty sides nicely) */
- var shop=document.getElementById('shop');
- function tag(){if(!shop)return;shop.querySelectorAll('.pimg:not([data-b])').forEach(function(b){var i=b.querySelector('img');if(!i)return;
-  b.setAttribute('data-b','1');b.style.setProperty('--bgimg','url("'+i.getAttribute('src')+'")')})}
- if(shop){new MutationObserver(tag).observe(shop,{childList:true,subtree:true});tag()}
-})();
+ })();

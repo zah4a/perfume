@@ -393,3 +393,15 @@ body::after{content:"";position:fixed;inset:0;z-index:85;pointer-events:none;bac
 .rip b{position:absolute;width:5px;height:5px;margin:-2.5px;border-radius:50%;background:#fff3d1;box-shadow:0 0 8px var(--gold);animation:pt .7s ease-out forwards}
 @keyframes pt{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
 @media(max-width:560px){.hero .wrap::before{width:340px;height:340px;top:-20px}.hero .wrap::after{width:420px;height:420px;top:-60px}.pc{padding:6px 6px 0;border-radius:24px}.pimg{border-radius:18px}}
+
+/* ===== SPEED FIX: lighter effects so clicks never lag ===== */
+body::before{display:none}
+body::after{display:none}
+@media(hover:hover) and (pointer:fine){body::after{display:block}}
+.pc{content-visibility:auto;contain-intrinsic-size:auto 330px;box-shadow:none;border:1px solid rgba(236,211,154,.28)}
+.pc::before{display:none}
+.pc:hover{box-shadow:none;border-color:var(--gold)}
+.pimg::before{content:none}
+.pimg{background:radial-gradient(circle at 50% 38%,#1f4d3d,#0a1f18 78%)}
+.pimg img{filter:none}
+.snd{backdrop-filter:none;background:#0d2a22}
